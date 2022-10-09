@@ -1,0 +1,80 @@
+%\newif\iflncs\lncsfalse
+%\newif\iffull\fulltrue
+
+%\documentclass[runningheads]{llncs}
+
+\documentclass[letterpaper,10pt]{article}
+\usepackage{times}
+\usepackage{fullpage}
+\usepackage[colorlinks=true,linkcolor=black,anchorcolor=black,citecolor=black,filecolor=black,menucolor=black,runcolor=black,urlcolor=black]{hyperref}
+%\usepackage{hyperref,microtype}
+\usepackage{amsmath,amsfonts,amssymb}
+\usepackage[amsmath,amsthm,thmmarks,hyperref]{ntheorem}
+\usepackage{mathtools}
+\usepackage{float}
+\usepackage{url}
+\usepackage{xspace}
+\usepackage{enumitem}
+%\usepackage{titlesec}
+%\setcounter{secnumdepth}{4}
+% remove "draft" to turn off fixme notes
+\usepackage[draft,multiuser,inline,nomargin,marginclue]{fixme}
+\usepackage{framed} 
+\usepackage{tikz}
+\usepackage[strings]{underscore}
+\usepackage{wrapfig}
+\usepackage{boxedminipage}
+\usepackage{multirow}
+
+\usepackage{caption}
+\captionsetup[figure]{font=scriptsize,labelfont=scriptsize}
+
+\captionsetup[table]{font=scriptsize,labelfont=scriptsize}
+
+\newenvironment{boxedalgo}
+{\begin{center}\begin{boxedminipage}{\textwidth}}
+		{\end{boxedminipage}\end{center}}
+
+%\hypersetup
+%{
+%	colorlinks = true,
+%	citecolor = [rgb]{0.1,0.13,0.53},
+%	linkcolor = [rgb]{0.5,0.01,0.13}
+%}
+%
+\input{head/head}
+
+%\newcommand{\smallmat}[1]{\parens*{\begin{smallmatrix} #1 \end{smallmatrix}}}
+
+%%%%
+
+\begin{document}
+	
+	\title{A Discussion of an Example Wallet Use Case}
+	
+	\author{%
+		Please add what you like!
+	}
+
+%	\author{}
+
+		
+	\maketitle
+
+%	\begin{abstract}
+%		\input{abstract}
+%	\end{abstract}
+
+	\newpage	
+
+\bibliographystyle{alpha}
+\bibliography{abbrev3,crypto,cryptoalt,other,MOLS}
+
+%\newpage
+	
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
