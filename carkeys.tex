@@ -1,0 +1,41 @@
+%!TEX root = ./main.tex
+
+\section{Car Keys}~\label{sec:carkeys}
+One potential application that might be served by the OWF is that of digital car keys.  We discuss this application in this section.  We emphasize that the wallet plays one role in \emph{a system}, so it is useful to consider the entire environment of the problem and application.
+
+\paragraph{The Basics.}  Intuitively, what we want in a car key system is the following:
+\begin{itemize}
+\item A user possesses a digital key that allows them to unlock and use \emph{their} car.
+\item Other unauthorized users should not be able to unlock and use their car.
+\end{itemize}
+In this case, the wallet would hold a digital token that represented the car key.
+
+\paragraph{Problems with the Basics.}  Of course, as anyone who was worked in this space can tell you, the above model is far too simplistic.  It doesn't provide all of the details necessary even for a basic application, it doesn't mention anything about security, and it doesn't define all of the roles of the users and machines in the environment.  So we need to define things in much greater detail.
+
+Let's start with functionality.  We might want considerably greater functionality than what we currently have.  We need to handle cases where cars are bought and sold (so transfer of the key token), we might want to delegate the key to someone else for a short time (i.e. let someone borrow the car), and so forth.  There may be other cases that we haven't even considered!  But it might be useful to see if anyone else has thought about the problem.
+
+\paragraph{Standards.}  It turns out there has been quite a bit of work on digital car key standardization.  There is an organization called the Car Connectivity Consortium that has written quite a bit about digital car keys and even has three standards~\cite{CarKeyWhitepaper}.  These standards appear to be supported by the Apple and Google wallets, and the consortium includes companies such as Apple, BMW, Ford, General Motors, Google, Honda, Hyundai, LG, Mercedes-Benz, NXP, Panasonic, Samsung, Thales, Volkswagen and Xiaomi.  
+
+The Car Connectivity Consortium considers the following use cases to be in scope of their project:
+\begin{itemize}
+\item Unlock the Vehicle – Smart device in vehicle’s proximity
+\item Lock the Vehicle
+\item Start the Engine – Smart device within a vehicle
+\item User Authentication
+\item Digital Key Provisioning
+\item Digital Key Revocation
+\item Selling the Vehicle
+\item Digital Key Sharing – Remote \& Peer-to-Peer
+\item Digital Key Properties – Restricting (shared) key usage
+\end{itemize}
+
+At least at a first glance, this seems like a reasonable set of properties, and it's likely that these folks have thought about this particular application much more than our community has, so they probably have the right set of applications.  Unfortunately, their standard is not fully public\footnote{Hart:  they claim that you can sign up and request it via email.  I tried this and the link did not work.}, so it is not possible to see how exactly their implementation works (and whether it's formally proven with standard notions of security, etc.).  
+
+Regardless of what exactly we think of the standard, it is likely what will be necessary for supporting digital car keys, at least in the short run.  Thus, if we want to support digital car keys, we probably need to support all of the functionality required by the standard.  This will involve acquiring the standard, figuring out what is needed in terms of primitives, and then implementing the standard.  Ideally, this would be from general primitives that can be used in other places.
+
+\paragraph{On Security.}  The standard should define a security model.\footnote{Many standards don't do this, unfortunately.}  For digital car keys, this would include things like replay attacks (an adversary that can watch a user authenticate to the car using a digital car key shouldn't be able to ``replay'' that conversation later and authenticate with the car), impersonation attacks to the manufacturer, and so forth.\footnote{Hart:  If I can get ahold of this standard, I will take a look at the security model and we can discuss it if people are interested.}  A good standard should clearly indicate what guarantees are provided by systems that implement the standards, as well as what is not in scope.
+
+However, standards may leave many things out of scope, including communication protocols, key storage, and more.  This is something that we will need to specify in wallet protocols:  what is the security model for the wallet itself?  This is likely going to be out of scope of almost all standards and protocols that we want to implement.  In addition, we might want to build additional security features on top of standards for wallets (so that the wallet is not a potential weak link in the security chain).
+
+For digital car keys, key recovery is probably already covered (even if it isn't listed in the above applications).  Digital car keys are probably not an application that needs a heavy cryptographic functionality for utilization (think of MPC signing for cryptocurrency transactions as something that would be such a heavy functionality), but something like a secure enclave or some sort of secure hardware might make a great use case.  Modularity and flexibility will be very important here (we may want to give people the option to use an enclave, but not make it mandatory, for instance).
+
